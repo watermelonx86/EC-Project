@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+@model List<Category>
+<h1> Category List </h1>
+@*references bootstrap: https://getbootstrap.com/docs/4.1/content/tables/*@
+<table class="table table-bordered table-striped table-dark table-hover">
+    <thead>
+    <tr>
+        <th>
+            Category Name
+        </th>
+        <th>
+            Display Order
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.DisplayOder
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
