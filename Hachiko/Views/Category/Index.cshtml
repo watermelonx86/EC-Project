@@ -4,20 +4,36 @@
 
 
 @model List<Category>
-<h1> Category List </h1>
-@*references bootstrap: https://getbootstrap.com/docs/4.1/content/tables/*@
-<table class="table table-bordered table-striped table-dark table-hover">
-    <thead>
-    <tr>
-        <th>
-            Category Name
-        </th>
-        <th>
-            Display Order
-        </th>
-    </tr>
-    </thead>
-    <tbody>
+
+<div class="container">
+    @*Thêm Buttion Create New Category*@
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Category List
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Category
+            </a>
+        </div>
+    </div>
+
+
+    @*references bootstrap: https://getbootstrap.com/docs/4.1/content/tables/*@
+    <table class="table table-bordered table-striped table-dark table-hover">
+        <thead>
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display Order
+            </th>
+        </tr>
+        </thead>
+        <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -25,10 +41,12 @@
                     @item.Name
                 </td>
                 <td>
-                    @item.DisplayOder
+                    @item.DisplayOrder
                 </td>
 
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+</div>

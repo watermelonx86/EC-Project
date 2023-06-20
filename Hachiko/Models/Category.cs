@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hachiko.Models
@@ -10,10 +11,13 @@ namespace Hachiko.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Category Name")]
         [StringLength(100)]
         public string Name { get; set; }
 
         public string? Description { get; set; }
-        public int DisplayOder { get; set; }
+
+        [DisplayName("Display Order")]
+        public int DisplayOrder { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Hachiko.Data;
+using Hachiko.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hachiko.Controllers
@@ -17,5 +18,11 @@ namespace Hachiko.Controllers
             var categoryList = _dbContext.Categories.ToList();
             return View("Index",categoryList);
         }
+
+        public IActionResult Create()
+        {
+            return View("Create",new Category());
+        }
+
     }
 }
