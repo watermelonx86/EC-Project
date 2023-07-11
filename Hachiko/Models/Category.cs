@@ -10,7 +10,7 @@ namespace Hachiko.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên không được bỏ trống")]
         [DisplayName("Category Name")]
         [StringLength(100)]
         public string Name { get; set; }
@@ -18,6 +18,7 @@ namespace Hachiko.Models
         public string? Description { get; set; }
 
         [DisplayName("Display Order")]
+        [Range(1,100)]
         public int DisplayOrder { get; set; }
     }
 }
