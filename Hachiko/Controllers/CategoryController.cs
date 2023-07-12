@@ -39,6 +39,10 @@ namespace Hachiko.Controllers
                 //add new Category by EF 
                 _dbContext.Categories.Add(obj);
                 _dbContext.SaveChanges();
+
+                //TempData to message to client
+                TempData["success"] = "Category created successfully";
+
                 return RedirectToAction("Index", "Category");
 
             }
@@ -56,8 +60,10 @@ namespace Hachiko.Controllers
             }
 
             Category? category = _dbContext.Categories.Find(id);
+            /*
             Category? category1 = _dbContext.Categories.FirstOrDefault(item => item.Id == id);
             Category? category2 = _dbContext.Categories.Where(item => item.Id == id).FirstOrDefault();
+            */
 
 
             if (category == null)
@@ -76,6 +82,9 @@ namespace Hachiko.Controllers
                 //eidt Category with EF 
                 _dbContext.Categories.Update(obj);
                 _dbContext.SaveChanges();
+
+                TempData["success"] = "Category edited successfully";
+
                 /*Sau khi them Category chuyen huong den Action Index de xem thay doi*/
                 return RedirectToAction("Index", "Category");
             }
@@ -117,6 +126,8 @@ namespace Hachiko.Controllers
 
             _dbContext.Categories.Remove(obj);
             _dbContext.SaveChanges();
+
+            TempData["success"] = "Category deleted successfully";
 
             /*Sau khi them Category chuyen huong den Action Index de xem thay doi*/
             return RedirectToAction("Index", "Category");

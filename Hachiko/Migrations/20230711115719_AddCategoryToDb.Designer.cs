@@ -11,15 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hachiko.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230619100704_AddSomeDataCategoryTable")]
-    partial class AddSomeDataCategoryTable
+    [Migration("20230711115719_AddCategoryToDb")]
+    partial class AddCategoryToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.7")
+                .HasAnnotation("ProductVersion", "7.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -35,7 +35,7 @@ namespace Hachiko.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DisplayOder")
+                    b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -51,37 +51,37 @@ namespace Hachiko.Migrations
                         new
                         {
                             Id = 1,
-                            DisplayOder = 1,
+                            DisplayOrder = 1,
                             Name = "Laptop"
                         },
                         new
                         {
                             Id = 2,
-                            DisplayOder = 2,
+                            DisplayOrder = 2,
                             Name = "RAM"
                         },
                         new
                         {
                             Id = 3,
-                            DisplayOder = 2,
+                            DisplayOrder = 2,
                             Name = "Monitor"
                         },
                         new
                         {
                             Id = 4,
-                            DisplayOder = 2,
+                            DisplayOrder = 2,
                             Name = "Gear"
                         },
                         new
                         {
                             Id = 5,
-                            DisplayOder = 3,
+                            DisplayOrder = 3,
                             Name = "HDD"
                         },
                         new
                         {
                             Id = 6,
-                            DisplayOder = 3,
+                            DisplayOrder = 3,
                             Name = "SSD"
                         });
                 });
