@@ -2,7 +2,7 @@
 using Hachiko.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hachiko.Data
+namespace Hachiko.DataAcess.Data
 {
     public class ApplicationDbContext : DbContext
     {

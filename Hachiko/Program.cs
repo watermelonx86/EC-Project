@@ -1,4 +1,4 @@
-using Hachiko.Data;
+using Hachiko.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

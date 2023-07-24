@@ -1,4 +1,4 @@
-﻿using Hachiko.Data;
+﻿using Hachiko.DataAcess.Data;
 using Hachiko.Models;
 using Microsoft.AspNetCore.Mvc;
 

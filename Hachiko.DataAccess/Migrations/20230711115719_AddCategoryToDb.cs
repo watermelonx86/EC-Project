@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Hachiko.Migrations
+namespace Hachiko.DataAcess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryToDb : Migration
