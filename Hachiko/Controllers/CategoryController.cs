@@ -7,16 +7,16 @@ namespace Hachiko.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepo;
+        private readonly IUnitOfWork _unitOfWork;
         //Constructor
-        public CategoryController(ICategoryRepository dbContext)
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _categoryRepo = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            var categoryList = _categoryRepo.GetAll().ToList();
+            var categoryList = _unitOfWork.Category.GetAll().ToList();
             return View("Index",categoryList);
         }
 
@@ -38,8 +38,8 @@ namespace Hachiko.Controllers
             if (ModelState.IsValid)
             {
                 //add new Category by EF 
-                _categoryRepo.Add(obj);
-                _categoryRepo.Save();
+                _unitOfWork.Category.Add(obj);
+                _unitOfWork.Save();
 
                 //TempData to message to client
                 TempData["success"] = "Category created successfully";
@@ -60,7 +60,7 @@ namespace Hachiko.Controllers
                 return NotFound();
             }
 
-            Category? category = _categoryRepo.Get(u=>u.Id == id);
+            Category? category = _unitOfWork.Category.Get(u=>u.Id == id);
             /*
             Category? category1 = _dbContext.Categories.FirstOrDefault(item => item.Id == id);
             Category? category2 = _dbContext.Categories.Where(item => item.Id == id).FirstOrDefault();
@@ -81,8 +81,8 @@ namespace Hachiko.Controllers
             if (ModelState.IsValid)
             {
                 //eidt Category with EF 
-                _categoryRepo.Update(obj);
-                _categoryRepo.Save();
+                _unitOfWork.Category.Update(obj);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Category edited successfully";
 
@@ -102,7 +102,7 @@ namespace Hachiko.Controllers
                 return NotFound();
             }
 
-            Category? category = _categoryRepo.Get(u => u.Id == id);
+            Category? category = _unitOfWork.Category.Get(u => u.Id == id);
         
 
             if (category == null)
@@ -118,15 +118,15 @@ namespace Hachiko.Controllers
         public IActionResult DeletePOST(int? id)
         {
 
-            Category? obj = _categoryRepo.Get(u => u.Id == id);
+            Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
 
             if (obj == null)
             {
                 return NotFound();
             }
 
-            _categoryRepo.Remove(obj);
-            _categoryRepo.Save();
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
 
             TempData["success"] = "Category deleted successfully";
 

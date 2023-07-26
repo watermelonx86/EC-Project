@@ -1,28 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Hachiko.DataAccess.Repository.IRepository;
 using Hachiko.DataAcess.Data;
-using Hachiko.Models;
 
 namespace Hachiko.DataAccess.Repository
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
+        public ICategoryRepository Category { get; private set; }
 
-        public CategoryRepository(ApplicationDbContext db) : base(db)
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Category = new CategoryRepository(_db);
         }
-     
-
-        public void Update(Category obj)
+        public void Save()
         {
-            _db.Categories.Update(obj);
+            _db.SaveChanges();
         }
     }
 }

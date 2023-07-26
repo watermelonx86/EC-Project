@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 // Setup EF Core
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 //Repository Pattern
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
     var app = builder.Build();
