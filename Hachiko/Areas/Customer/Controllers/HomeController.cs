@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Hachiko.Controllers
+namespace Hachiko.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,7 +22,7 @@ namespace Hachiko.Controllers
                 .Select(c => c - 48)
                 .Select((thisNum, i) => i % 2 == 0
                     ? thisNum
-                    : ((thisNum *= 2) > 9 ? thisNum - 9 : thisNum)
+                    : (thisNum *= 2) > 9 ? thisNum - 9 : thisNum
                 ).Sum() % 10 == 0;
         }
 

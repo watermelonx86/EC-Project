@@ -3,8 +3,9 @@ using Hachiko.DataAcess.Data;
 using Hachiko.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hachiko.Controllers
+namespace Hachiko.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -17,12 +18,12 @@ namespace Hachiko.Controllers
         public IActionResult Index()
         {
             var categoryList = _unitOfWork.Category.GetAll().ToList();
-            return View("Index",categoryList);
+            return View("Index", categoryList);
         }
 
         public IActionResult Create()
         {
-            return View("Create",new Category());
+            return View("Create", new Category());
         }
 
         [HttpPost]
@@ -60,7 +61,7 @@ namespace Hachiko.Controllers
                 return NotFound();
             }
 
-            Category? category = _unitOfWork.Category.Get(u=>u.Id == id);
+            Category? category = _unitOfWork.Category.Get(u => u.Id == id);
             /*
             Category? category1 = _dbContext.Categories.FirstOrDefault(item => item.Id == id);
             Category? category2 = _dbContext.Categories.Where(item => item.Id == id).FirstOrDefault();
@@ -103,7 +104,7 @@ namespace Hachiko.Controllers
             }
 
             Category? category = _unitOfWork.Category.Get(u => u.Id == id);
-        
+
 
             if (category == null)
             {
