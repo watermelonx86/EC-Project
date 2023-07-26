@@ -1,3 +1,5 @@
+using Hachiko.DataAccess.Repository;
+using Hachiko.DataAccess.Repository.IRepository;
 using Hachiko.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +10,11 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddControllersWithViews();
 // Setup EF Core
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+//Repository Pattern
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
-
-var app = builder.Build();
+    var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

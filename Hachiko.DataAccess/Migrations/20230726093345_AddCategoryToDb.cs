@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Hachiko.DataAcess.Migrations
+namespace Hachiko.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryToDb : Migration
@@ -32,12 +32,9 @@ namespace Hachiko.DataAcess.Migrations
                 columns: new[] { "Id", "Description", "DisplayOrder", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, 1, "Laptop" },
-                    { 2, null, 2, "RAM" },
-                    { 3, null, 2, "Monitor" },
-                    { 4, null, 2, "Gear" },
-                    { 5, null, 3, "HDD" },
-                    { 6, null, 3, "SSD" }
+                    { 1, null, 1, "Action" },
+                    { 2, null, 2, "SciFi" },
+                    { 3, null, 3, "History" }
                 });
         }
 

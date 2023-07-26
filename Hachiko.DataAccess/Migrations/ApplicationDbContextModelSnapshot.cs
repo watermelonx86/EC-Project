@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Hachiko.DataAcess.Migrations
+namespace Hachiko.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -49,37 +49,19 @@ namespace Hachiko.DataAcess.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "Laptop"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "RAM"
+                            Name = "SciFi"
                         },
                         new
                         {
                             Id = 3,
-                            DisplayOrder = 2,
-                            Name = "Monitor"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DisplayOrder = 2,
-                            Name = "Gear"
-                        },
-                        new
-                        {
-                            Id = 5,
                             DisplayOrder = 3,
-                            Name = "HDD"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DisplayOrder = 3,
-                            Name = "SSD"
+                            Name = "History"
                         });
                 });
 #pragma warning restore 612, 618
