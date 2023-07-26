@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Hachiko.Controllers
+namespace Hachiko.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,14 +14,27 @@ namespace Hachiko.Controllers
             _logger = logger;
         }
 
+        //Ref: https://stackoverflow.com/questions/21249670/implementing-luhn-algorithm-using-c-sharp
+        //Luhn Algorithm
+        public static bool Luhn(string digits)
+        {
+            return digits.All(char.IsDigit) && digits.Reverse()
+                .Select(c => c - 48)
+                .Select((thisNum, i) => i % 2 == 0
+                    ? thisNum
+                    : (thisNum *= 2) > 9 ? thisNum - 9 : thisNum
+                ).Sum() % 10 == 0;
+        }
+
+
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return View("Privacy");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
