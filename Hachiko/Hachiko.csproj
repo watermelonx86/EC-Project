@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Product\" />
     <Folder Include="Controllers\" />
     <Folder Include="docs\" />
   </ItemGroup>

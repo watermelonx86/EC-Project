@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Hachiko.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IProductRepository : IRepository<Product>
     {
-        ICategoryRepository Category { get; }
-        IProductRepository Product { get; }
-        public void Save();
+        void Update(Product obj);
     }
 }
