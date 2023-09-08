@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hachiko.DataAccess.Repository.IRepository;
+﻿using Hachiko.DataAccess.Repository.IRepository;
 using Hachiko.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +14,7 @@ namespace Hachiko.DataAccess.Repository
             _db = db;
             this.dbSet = _db.Set<T>();
             //_db.Categories == dbSet
+            _db.Products.Include(u => u.Category);
         }
 
 
@@ -28,16 +24,33 @@ namespace Hachiko.DataAccess.Repository
             //throw new NotImplementedException();
         }
 
-        public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter)
+        public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProperty in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        //Category, CoverType
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if(!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach(var includeProperty in includeProperties
+                    .Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
             return query.ToList();
         }
         

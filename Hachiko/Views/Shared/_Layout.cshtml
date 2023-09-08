@@ -11,6 +11,12 @@
     @*Add toastr js lib for notifications*@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @* Add tinymce js lib for text editor *@
+    <script src="https://cdn.tiny.cloud/1/y5veqttnh23ds01swn1d4grtue1b5t1712zp09rd89jnwx9j/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    @* Add dataTables js lib for table *@
+    <script src="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"></script>
+    @* Add sweetalert2 js lib *@
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 </head>
@@ -24,7 +30,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -43,6 +49,9 @@
                                 <li class="dropdown-item">
                                     <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
                                 </li>
+                                <li class="dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+                                </li>
                                 <li><hr class="dropdown-divider"></li>
                                 @* <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -52,10 +61,14 @@
                         </li>
 
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+ 
+
+
 <div class="container">
     <main role="main" class="pb-3">
         @*Sử dụng partial view cho mục đích thông báo cho user khi thành công / thất bại,... cho 1 action nào đó*@
@@ -64,14 +77,18 @@
     </main>
 </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="border-top footer bg-primary text-muted ">
+        <div class="text-center">
             &copy; 2023 - Hachiko <i class="bi bi-heart-fill"></i> EC232-03 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+ 
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
