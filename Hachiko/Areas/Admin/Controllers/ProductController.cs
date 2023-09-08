@@ -1,7 +1,9 @@
 ﻿using Hachiko.DataAccess.Repository;
 using Hachiko.DataAccess.Repository.IRepository;
 using Hachiko.Models;
+using Hachiko.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hachiko.Areas.Admin.Controllers
 {
@@ -18,22 +20,44 @@ namespace Hachiko.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var productList = _unitOfWork.Product.GetAll().ToList();
+            
+             
             return View("Index",productList);
         }
 
-        public IActionResult Create()
+        public IActionResult UpdateAndInsert(int? id)
         {
-            return View("Create",new Product());
+            //Get CategoryList
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.
+                GetAll().Select(
+              u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() }
+                );
+            //Pass CategoryList to View by ViewBag
+            //ViewBag.CategoryList = CategoryList;
+            ProductVM productVM = new ProductVM()
+            {
+                Product = new Product(),
+                CategoryList = CategoryList
+            };
+            if (id == null || id == 0)
+            {
+                return View("UpdateAndInsert", productVM);
+            } else
+            {
+                //Update 
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View("UpdateAndInsert", productVM);
+            }
         }
 
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult UpdateAndInsert(ProductVM productVM, IFormFile? file)
         {  
 
             if (ModelState.IsValid)
             {
                 //add new Product by EF 
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
 
                 //TempData to message to client
@@ -41,51 +65,23 @@ namespace Hachiko.Areas.Admin.Controllers
 
                 return RedirectToAction("Index", "Product");
 
+            } else
+            {
+                productVM.CategoryList = _unitOfWork.Category.
+               GetAll().Select(
+             u => new SelectListItem { 
+                 Text = u.Name, 
+                 Value = u.Id.ToString() 
+                });
+                
+                return View(productVM);
             }
 
-            return View(obj);
+           
             /*Sau khi them Category chuyen huong den Action Index de xem thay doi*/
         }
 
-        public IActionResult Edit(int? id)
-        {
-            //Validation
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            Product? product = _unitOfWork.Product.Get(u => u.Id == id);
-          
-
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                //edit Product with EF 
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-
-                TempData["success"] = "Category edited successfully";
-
-                /*Sau khi them Category chuyen huong den Action Index de xem thay doi*/
-                return RedirectToAction("Index", "Product");
-            }
-
-            return View(obj);
-        }
-
-        //GET
+        
         public IActionResult Delete(int? id)
         {
             //Validation

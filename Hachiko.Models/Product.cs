@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Hachiko.Models
 {
@@ -37,5 +39,12 @@ namespace Hachiko.Models
         [Range(0, int.MaxValue)]
         public double Price3 { get; set; }
 
+        public int CategoryId { get; set; }
+        //Reference key
+        [ForeignKey("CategoryId")]
+        [ValidateNever]
+        public Category Category { get; set; }
+        [ValidateNever]
+        public string ImageUrl { get; set; }
     }
 }

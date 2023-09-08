@@ -35,7 +35,9 @@ namespace Hachiko.DataAcess.Data
                     ListPrice = 99,
                     Price1 = 90,
                     Price2 = 85,
-                    Price3 = 80
+                    Price3 = 80,
+                    CategoryId = 1,
+                    ImageUrl =""
                 },
                 new Product
                 {
@@ -47,7 +49,9 @@ namespace Hachiko.DataAcess.Data
                     ListPrice = 40,
                     Price1 = 30,
                     Price2 = 25,
-                    Price3 = 20
+                    Price3 = 20,
+                    CategoryId = 1,
+                    ImageUrl = ""
                 },
                 new Product
                 {
@@ -59,7 +63,9 @@ namespace Hachiko.DataAcess.Data
                     ListPrice = 55,
                     Price1 = 50,
                     Price2 = 40,
-                    Price3 = 35
+                    Price3 = 35,
+                    CategoryId = 2,
+                    ImageUrl = ""
                 },
                 new Product
                 {
@@ -71,7 +77,9 @@ namespace Hachiko.DataAcess.Data
                     ListPrice = 70,
                     Price1 = 65,
                     Price2 = 60,
-                    Price3 = 55
+                    Price3 = 55,
+                    CategoryId = 3,
+                    ImageUrl = ""
                 },
                 new Product
                 {
@@ -83,7 +91,9 @@ namespace Hachiko.DataAcess.Data
                     ListPrice = 30,
                     Price1 = 27,
                     Price2 = 25,
-                    Price3 = 20
+                    Price3 = 20,
+                    CategoryId = 2,
+                    ImageUrl = ""
                 },
                 new Product
                 {
@@ -95,7 +105,9 @@ namespace Hachiko.DataAcess.Data
                     ListPrice = 25,
                     Price1 = 23,
                     Price2 = 22,
-                    Price3 = 20
+                    Price3 = 20,
+                    CategoryId = 2,
+                    ImageUrl = ""
                 }
                 );
         }
