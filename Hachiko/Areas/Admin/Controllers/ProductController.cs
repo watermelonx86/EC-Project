@@ -141,7 +141,7 @@ namespace Hachiko.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-
+            //TODO: Handle delete image file
             Product? obj = _unitOfWork.Product.Get(u => u.Id == id);
 
             if (obj == null)
@@ -165,6 +165,28 @@ namespace Hachiko.Areas.Admin.Controllers
             var objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return Json(new { data = objProductList });
         }
+
+        [HttpDelete]
+        public IActionResult DeleteAPI(int? id)
+        {
+            var product = _unitOfWork.Product.Get(u => u.Id == id);
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+            var oldImagePath = 
+                Path.Combine(_webHostEnvironment.WebRootPath, 
+                product.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+            _unitOfWork.Product.Remove(product);
+            _unitOfWork.Save();
+
+            return Json(new {success= true, message = "Delete Successful"});
+        }
+
         #endregion
     }
 }

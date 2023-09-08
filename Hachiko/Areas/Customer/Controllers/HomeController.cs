@@ -1,4 +1,5 @@
-﻿using Hachiko.Models;
+﻿using Hachiko.DataAccess.Repository.IRepository;
+using Hachiko.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,10 +9,12 @@ namespace Hachiko.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
+            
         }
 
         //Ref: https://stackoverflow.com/questions/21249670/implementing-luhn-algorithm-using-c-sharp
@@ -29,7 +32,14 @@ namespace Hachiko.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            return View("Index");
+            List<Product>? productList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            return View("Index",productList);
+        }
+
+        public IActionResult Details(int id)
+        {
+            Product product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "Category");
+            return View("Details",product);
         }
 
         public IActionResult Privacy()
