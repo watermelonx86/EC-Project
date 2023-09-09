@@ -2,23 +2,7 @@
 
 <div class="row pb-3">
     <div class="col-lg-2">
-        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
-        {
-            <input type="text" name="query" placeholder="Tìm kiếm sản phẩm" />
-            <input type="submit" value="Tìm kiếm" />
-        }
-
-
-
-        <p style="color:green; font-weight:bold;">List Category</p>
-        @foreach (var category in ViewBag.Categories) 
-        { 
-            //Category List with bold text 
-           
-            <div class="mb-3"> 
-                <a asp-action="ProductByCategory" asp-route-id="@category.Id">@category.Name</a> 
-            </div> 
-        }
+        <a asp-action="Index">Back to Home</a>
     </div>
     <div class="col-lg-10">
         <div class="row">

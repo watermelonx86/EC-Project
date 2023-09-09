@@ -9,9 +9,10 @@ namespace Hachiko.Utility
 {
     public class EmailSender : IEmailSender
     {
-        Task IEmailSender.SendEmailAsync(string email, string subject, string htmlMessage)
+        public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            throw new NotImplementedException();
+            //logic to send email
+            return Task.CompletedTask;
         }
     }
 }

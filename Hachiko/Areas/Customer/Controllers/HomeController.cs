@@ -33,7 +33,22 @@ namespace Hachiko.Areas.Customer.Controllers
         public IActionResult Index()
         {
             List<Product>? productList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            List<Category>? categories = _unitOfWork.Category.GetAll().ToList();
+            ViewBag.Categories = categories;
             return View("Index",productList);
+        }
+
+        public IActionResult ProductByCategory(int id)
+        {
+            var productList = _unitOfWork.Product.GetAll(includeProperties: "Category").Where(i => i.CategoryId == id).ToList();
+            return View("ProductByCategory", productList);
+        }
+
+        [HttpPost]
+        public IActionResult Search(string query)
+        {
+            var productList = _unitOfWork.Product.GetAll(includeProperties: "Category").Where(u => u.Title.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+            return View("ProductByCategory", productList);
         }
 
         public IActionResult Details(int id)
@@ -41,6 +56,8 @@ namespace Hachiko.Areas.Customer.Controllers
             Product product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "Category");
             return View("Details",product);
         }
+
+
 
         public IActionResult Privacy()
         {
