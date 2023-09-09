@@ -1,11 +1,14 @@
 ﻿using Hachiko.DataAccess.Repository.IRepository;
 using Hachiko.DataAcess.Data;
 using Hachiko.Models;
+using Hachiko.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hachiko.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
